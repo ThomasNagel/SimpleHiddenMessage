@@ -29,10 +29,7 @@ if mode == "w":
 					stop = True
 					break
 				ascii_num = ord(input_text[t_index])
-				for i in range(3):
-					if ascii_num // (10**(2 - i)) % 10 > 5 and pix[x_px, y_px][i] >= 250:
-						pix[x_px, y_px] = (pix[x_px, y_px][0] * (i!=0) + 240 * (i==0), pix[x_px, y_px][1] * (i!=1) + 240 * (i==1), pix[x_px, y_px][2] * (i!=2) + 240 * (i==2))
-				pix[x_px, y_px] = (pix[x_px, y_px][0] - pix[x_px, y_px][0] % 10 + (ascii_num // 100 % 10), pix[x_px, y_px][1] - pix[x_px, y_px][1] % 10 + (ascii_num // 10 % 10), pix[x_px, y_px][2] - pix[x_px, y_px][2] % 10 + (ascii_num % 10), pix[x_px, y_px][3])
+				pix[x_px, y_px] = (pix[x_px, y_px][0] - pix[x_px, y_px][0] % 10 + (ascii_num // 100 % 10), pix[x_px, y_px][1] - pix[x_px, y_px][1] % 10 + (ascii_num // 10 % 10) - 10 * (ascii_num // 10 % 10 > 5 and pix[x_px, y_px][1] >= 250), pix[x_px, y_px][2] - pix[x_px, y_px][2] % 10 + (ascii_num % 10) - 10 * (ascii_num % 10 > 5 and pix[x_px, y_px][2] >= 250), pix[x_px, y_px][3])
 				t_index = t_index + 1
 
 	new_filename = input("Please enter a new png filename:")
